@@ -2,7 +2,7 @@ import { useState } from "react"
 import { logo } from "../constants/logo"
 import { Input } from "../ui"
 import { useDispatch, useSelector } from "react-redux"
-import { loginUserStart } from "../slice/authSlice"
+import { registerUserStart } from "../slice/authSlice"
 const Register = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -12,7 +12,7 @@ const Register = () => {
 
   const onSubmit = (e)=>{
     e.preventDefault()
-    dispatch(loginUserStart())
+    dispatch(registerUserStart())
   }
 
   return (
