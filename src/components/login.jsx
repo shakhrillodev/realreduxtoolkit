@@ -1,23 +1,33 @@
 import { useDispatch, useSelector } from "react-redux"
 import { logo } from "../constants/logo"
 import { Input } from "../ui"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { signUserStart, signUserFailure, signUserSuccess } from "../slice/authSlice"
 import AuthService from "../service/auth"
 import { AuthError } from "./"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {isLoading} = useSelector(state => state.auth)
   const dispatch = useDispatch()
-  
+  const navigate = useNavigate()
+  const {loggedIn} = useSelector( state => state.auth )
+
+  useEffect(()=>{
+    if(loggedIn)
+    navigate('/')
+  }, [])
+
+
   const onLogin = async (e)=>{
     e.preventDefault()
     dispatch(signUserStart())
     try {
       const response = await AuthService.userLogin({email, password})
       dispatch(signUserSuccess(response.data.user))
+      navigate('/')
     } catch (error) {
       dispatch(signUserFailure(error.response.data.errors))
     }
