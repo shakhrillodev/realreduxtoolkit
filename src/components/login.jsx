@@ -4,6 +4,7 @@ import { Input } from "../ui"
 import { useState } from "react"
 import { signUserStart, signUserFailure, signUserSuccess } from "../slice/authSlice"
 import AuthService from "../service/auth"
+import { AuthError } from "./"
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -27,6 +28,7 @@ const Login = () => {
     <form onSubmit={onLogin} className="form-signin w-25 mx-auto" >
       <img src={logo} alt="logo" width={80} />
       <h3 className="fw-normal my-2" >Please login</h3>
+      <AuthError />
       <Input type="email" label={'email'} state={email} setState={setEmail} />
       <Input type="password" label={'password'} state={password} setState={setPassword} />
       <button type="submit" disabled={isLoading} className=" w-100 btn btn-primary btn-lg mt-2">
