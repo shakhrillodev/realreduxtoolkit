@@ -3,7 +3,7 @@ import { Login, Main, Navbar, Register } from "./components"
 import { useEffect } from "react"
 import AuthService from "./service/auth"
 import { useDispatch } from "react-redux"
-import { getUser } from "./slice/authSlice"
+import { signUserSuccess } from "./slice/authSlice"
 import { getItem } from "./helpers/persistent-localstorage"
 
 
@@ -12,7 +12,7 @@ const App = () => {
   const setUser = async()=>{
     try {
       const data = await AuthService.getUserData()
-      dispatch(getUser(data.data.user))
+      dispatch(signUserSuccess(data.data.user))
     } catch (error) {
       console.log(error);
     }
