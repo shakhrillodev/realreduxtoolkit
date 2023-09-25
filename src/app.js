@@ -5,11 +5,13 @@ import AuthService from "./service/auth"
 import { useDispatch } from "react-redux"
 import { signUserSuccess } from "./slice/authSlice"
 import { getItem } from "./helpers/persistent-localstorage"
+import { ArticleService } from "./service/article"
+import { getArticleSuccess } from "./slice/articleSlice"
 
 
 const App = () => {
   const dispatch = useDispatch()
-  const setUser = async()=>{
+  const getUser = async()=>{
     try {
       const data = await AuthService.getUserData()
       dispatch(signUserSuccess(data.data.user))
@@ -18,11 +20,21 @@ const App = () => {
     }
   }
 
+  const getArticle = async()=>{
+    try {
+      const { articles } = await ArticleService.getArticle()
+      dispatch(getArticleSuccess(articles))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(()=>{
     const token = getItem('token')    
     if(token){
-      setUser()
+      getUser()
     }
+    getArticle()
   }, [])
 
   return (
