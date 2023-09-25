@@ -5,3 +5,11 @@ export const setItem = (key, data)=>{
         console.log('Error saving token');
     }
 }
+
+export const getItem = (key)=>{
+    try {
+        return localStorage.getItem(key)
+    } catch (error) {
+        console.log('Error getting token');
+    }
+}

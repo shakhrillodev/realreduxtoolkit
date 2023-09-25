@@ -1,7 +1,30 @@
 import {Routes, Route } from "react-router-dom"
 import { Login, Main, Navbar, Register } from "./components"
+import { useEffect } from "react"
+import AuthService from "./service/auth"
+import { useDispatch } from "react-redux"
+import { getUser } from "./slice/authSlice"
+import { getItem } from "./helpers/persistent-localstorage"
+
 
 const App = () => {
+  const dispatch = useDispatch()
+  const setUser = async()=>{
+    try {
+      const data = await AuthService.getUserData()
+      dispatch(getUser(data.data.user))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    const token = getItem('token')    
+    if(token){
+      setUser()
+    }
+  }, [])
+
   return (
     <div>
     <Navbar />

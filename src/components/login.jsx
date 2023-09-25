@@ -16,9 +16,10 @@ const Login = () => {
   const {loggedIn} = useSelector( state => state.auth )
 
   useEffect(()=>{
-    if(loggedIn)
-    navigate('/')
-  }, [])
+    if(loggedIn){
+      navigate('/')
+    }
+  }, [loggedIn])
 
 
   const onLogin = async (e)=>{

@@ -17,9 +17,10 @@ const Register = () => {
   const {loggedIn} = useSelector( state => state.auth )
 
   useEffect(()=>{
-    if(loggedIn)
-    navigate('/')
-  }, [])
+    if(loggedIn){
+      navigate('/')
+    }
+  }, [loggedIn])
 
   const onRegister = async (e)=>{
     e.preventDefault()

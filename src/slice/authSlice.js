@@ -25,9 +25,14 @@ export const authSlice = createSlice({
             state.errors = action.payload
             state.isLoading = false
             state.loggedIn = false
+        },
+        getUser: (state, action)=>{
+            state.user = action.payload
+            state.isLoading = false
+            state.loggedIn = true
         }
     }
 })
 
-export const {signUserStart, signUserSuccess, signUserFailure} = authSlice.actions
+export const {signUserStart, signUserSuccess, signUserFailure, getUser} = authSlice.actions
 export default authSlice.reducer
