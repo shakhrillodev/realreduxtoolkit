@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { signUserSuccess } from "./slice/authSlice"
 import { getItem } from "./helpers/persistent-localstorage"
 import { ArticleService } from "./service/article"
-import { getArticleSuccess } from "./slice/articleSlice"
+import { getArticleStart, getArticleSuccess } from "./slice/articleSlice"
 
 
 const App = () => {
@@ -21,6 +21,7 @@ const App = () => {
   }
 
   const getArticle = async()=>{
+    dispatch(getArticleStart())
     try {
       const { articles } = await ArticleService.getArticle()
       dispatch(getArticleSuccess(articles))
