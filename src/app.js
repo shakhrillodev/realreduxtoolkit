@@ -41,12 +41,14 @@ const App = () => {
   return (
     <div>
     <Navbar />
-    <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/articles/:slug" element={<ArticleDetail />} />
-    </Routes>  
+    <div className="container">
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/articles/:slug" element={<ArticleDetail />} />
+      </Routes>  
+    </div>
     </div>
   )
 }

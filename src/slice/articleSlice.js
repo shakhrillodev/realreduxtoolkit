@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     articles: [],
-    articleDetail: [],
-    isLoading: false
+    articleDetail: {},
+    isLoading: ''
 }
 
 export const ArticleSlice = createSlice({
@@ -18,7 +18,7 @@ export const ArticleSlice = createSlice({
             state.isLoading = false
         },
         getArticleDetailStart: (state)=>{
-            state.isLoading = false
+            state.isLoading = true
         },
         getArticleDetailSuccess: (state, action)=>{
             state.articleDetail = action.payload
