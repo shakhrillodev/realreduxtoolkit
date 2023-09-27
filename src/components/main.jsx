@@ -1,10 +1,48 @@
 import { useSelector } from "react-redux"
 import { Loader } from "../ui"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import AuthService from "../service/auth"
+import { useDispatch } from "react-redux"
+import { signUserSuccess } from "../slice/authSlice"
+import { getItem } from "../helpers/persistent-localstorage"
+import { ArticleService } from "../service/article"
+import { getArticleStart, getArticleSuccess } from "../slice/articleSlice"
+
 
 const Main = () => {
   const {articles, isLoading} = useSelector(state => state.article)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const getUser = async()=>{
+    try {
+      const data = await AuthService.getUserData()
+      dispatch(signUserSuccess(data.data.user))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getArticle = async()=>{
+    dispatch(getArticleStart())
+    try {
+      const { articles } = await ArticleService.getArticle()
+      dispatch(getArticleSuccess(articles))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    const token = getItem('token')    
+    if(token){
+      getUser()
+    }
+    getArticle()
+  }, [])
+
+
+
   return (
     <div className="album py-5 ">
     <div>
