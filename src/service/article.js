@@ -12,5 +12,9 @@ export const ArticleService = {
     postArticle: async (article) => {
         const data = await axios.post('/articles', {article})
         return data
+    },
+    deleteArticle: async (slug) => {
+        const data = await axios.delete(`/articles/${slug}`)
+        return data
     }
 }
