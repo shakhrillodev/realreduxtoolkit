@@ -1,5 +1,5 @@
 import {Routes, Route } from "react-router-dom"
-import { ArticleDetail, Login, Main, Navbar, Register, CreateArticle } from "./components"
+import { ArticleDetail, Login, Main, Navbar, Register, CreateArticle, EditArticle } from "./components"
 
 const App = () => {
   return (
@@ -12,6 +12,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/articles/:slug" element={<ArticleDetail />} />
         <Route path="/create-article" element={<CreateArticle />} />
+        <Route path="/edit-article/:slug" element={<EditArticle />} />
       </Routes>  
     </div>
     </div>
